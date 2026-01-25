@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michael E. Piang | Civil Engineer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:#1f3c88;
+  --accent:#ff6f61;
+  --light-bg:#ffffff;
+  --dark-bg:#1a1a1a;
+  --gray-bg:#f4f6f8;
+  --text-light:#f4f4f4;
+  --text-dark:#333333;
+}
+* { box-sizing:border-box; margin:0; padding:0; font-family:'Poppins', sans-serif; }
+body { background:var(--gray-bg); color:var(--text-dark); line-height:1.8; transition: background 0.5s, color 0.5s; scroll-behavior:smooth;}
+body.dark { background:var(--dark-bg); color:var(--text-light); }
+/* Avoid sticky header hiding section content */
+body {
+  scroll-padding-top: 100px; /* ensures anchors and scrolls respect sticky header */
+}
+
+/* Optional: extra spacing for first section */
+#about {
+  padding-top: 120px; /* pushes content below header on page load */
+}
+
+/* Header */
+header { background: linear-gradient(135deg, var(--primary), #3b5998); color:white; text-align:center; padding:80px 20px; position:sticky; top:0; z-index:999; box-shadow:0 5px 15px rgba(0,0,0,0.3); transition: padding 0.3s ease; }
+header.shrink { padding:20px 0px; }
+header .header-inner { display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; }
+.header-pic { width:200px; height:200px; border-radius:50%; object-fit:cover; border:4px solid var(--accent); transition: transform 0.3s ease; }
+header.shrink .header-pic { width:100px; height:100px; }
+.header-text h1 { margin:0; font-size:2.8em; transition: font-size 0.3s ease; }
+header.shrink .header-text h1 { font-size:1.5em; }
+.header-text p { margin:5px 0 15px 0; transition: font-size 0.3s ease, opacity 0.3s; }
+header.shrink .header-text p { font-size:0.9em; opacity:0.8; }
+/* Center only the name when header shrinks */
+/* Center everything in header when shrunk */
+header.shrink .header-inner {
+  flex-direction: column;   /* stack image + text vertically */
+  align-items: center;      /* center everything horizontally */
+  text-align: center;       /* center text inside header-text */
+  gap: 15px;                /* spacing between picture, name, subtitle, button */
+}
+
+header.shrink .header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* center all text & button */
+  gap: 5px;                 /* small spacing between paragraphs and button */
+}
+/* Shrunk header: compact, no picture */
+header.shrink {
+  padding: 5px 20px;           
+  height: 50px;                
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* Hide profile picture when shrunk */
+header.shrink .header-pic {
+  display: none;
+}
+
+/* Shrunk header text */
+header.shrink .header-text {
+  flex-direction: row;          
+  justify-content: center;      
+  gap: 5px;                     
+  text-align: center;
+}
+
+header.shrink .header-text h1 {
+  font-size: 1.3em;             
+  margin: 0;
+}
+
+header.shrink .header-text p {
+  font-size: 0.8em;
+  opacity: 0.85;
+  margin: 0;
+}
+/* ===== Shrunk Header ===== */
+header.shrink {
+  padding: 20px 20px;       /* smaller header */
+}
+
+header.shrink .header-inner {
+  flex-direction: column;   /* stack text vertically */
+  align-items: center;      /* center text horizontally */
+  text-align: center;       /* center inside header-text */
+  gap: 10px;                /* spacing between text lines */
+}
+
+header.shrink .header-pic {
+  display: none;            /* hide profile picture */
+}
+
+header.shrink .cta {
+  display: none;            /* hide Download CV button */
+}
+
+header.shrink .header-text h1 {
+  font-size: 1.5em;         /* smaller name */
+}
+
+header.shrink .header-text p {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+/* ===== Shrunk Header Ribbon ===== */
+header.shrink {
+  padding: 0 20px;       /* remove extra padding */
+  height: 80px;          /* fixed ribbon height */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* subtle shadow */
+}
+
+/* Center the text vertically and horizontally */
+header.shrink .header-inner {
+  flex-direction: row;    /* row layout */
+  align-items: center;    /* vertically center */
+  justify-content: center;/* horizontally center */
+  height: 100%;
+  text-align: center;
+}
+
+/* Text container adjustments */
+header.shrink .header-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  gap: 0;                  /* remove extra spacing */
+}
+
+/* Name styling */
+header.shrink .header-text h1 {
+  font-size: 1.3em;       /* smaller for ribbon */
+  line-height: 1.2em;
+  margin: 0;
+}
+
+/* Subtitle styling */
+header.shrink .header-text p {
+  font-size: 0.8em;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* Hide profile picture and CV button */
+header.shrink .header-pic,
+header.shrink .cta {
+  display: none;
+}
+
+/* ===== Mini Header Adjustments ===== */
+#mini-header {
+  height: 60px;           /* match shrunk header height */
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;    /* vertical center */
+  justify-content: center;/* horizontal center */
+}
+
+/* Mini Header */
+#mini-header { position:fixed; top:0; left:0; width:100%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; padding:20px 0; font-weight:600; font-size:1.2em; z-index:1001; opacity:0; pointer-events:none; transition:opacity 0.4s ease; }
+#mini-header.visible { opacity:1; pointer-events:auto; }
+
+/* Buttons */
+.cta { display:inline-block; padding:12px 30px; margin:5px; background:var(--accent); color:white; text-decoration:none; border-radius:50px; font-weight:600; transition:0.4s; }
+.cta:hover { transform:scale(1.05); background:linear-gradient(45deg,#ff6f61,#ff9f80); color:white; }
+.toggle-btn { position:fixed; top:20px; right:20px; padding:12px 20px; background:var(--primary); color:white; border:none; border-radius:25px; cursor:pointer; z-index:1002; transition:0.3s; }
+.toggle-btn:hover { transform:scale(1.05); }
+
+/* Sections */
+section { max-width:1100px; margin:auto; padding:90px 20px; opacity:0; transform:translateY(50px); transition:all 0.8s ease-in-out; border-left:8px solid transparent; }
+section.visible { opacity:1; transform:translateY(0); }
+section:nth-child(odd) { border-left-color:#ff6f61; background:linear-gradient(120deg, rgba(255,111,97,0.05), transparent); }
+section:nth-child(even) { border-left-color:#1f3c88; background:linear-gradient(120deg, rgba(31,60,136,0.05), transparent); }
+
+/* Cards */
+.card { background:var(--light-bg); padding:40px 35px; border-radius:20px; box-shadow:0 15px 30px rgba(0,0,0,0.1); margin-bottom:50px; transition: transform 0.5s, background 0.5s, color 0.5s; line-height:1.9; }
+body.dark .card { background:#222; color:var(--text-light); }
+.card:hover { transform:translateY(-8px) scale(1.02); box-shadow:0 20px 40px rgba(0,0,0,0.3); }
+
+/* Tabs */
+.tab-buttons { display:flex; gap:10px; margin-bottom:20px; position:relative; flex-wrap:wrap; }
+.tab-btn { padding:10px 25px; background:transparent; color:var(--primary); border:none; cursor:pointer; font-weight:600; position:relative; z-index:1; transition: color 0.3s; }
+.tab-btn:hover { color:var(--accent); }
+.tab-btn.active { color:white; }
+.tab-content { display:none; opacity:0; transform:translateY(20px); transition:all 0.5s ease; }
+.tab-content.active { display:block; opacity:1; transform:translateY(0); }
+
+/* Skills */
+.skill-container { margin-bottom:20px; }
+.skill-title { display:flex; justify-content:space-between; font-weight:600; margin-bottom:5px; }
+.skill-bar { width:100%; height:20px; background:#ddd; border-radius:10px; overflow:hidden; }
+.skill-bar-inner { height:100%; width:0; background:linear-gradient(135deg,#ff6f61,#ff9f80); text-align:right; padding-right:5px; line-height:20px; color:white; font-weight:600; border-radius:10px; transition: width 1.5s ease-in-out; }
+
+/* Back to Top */
+#backToTop { position:fixed; bottom:40px; right:40px; background:linear-gradient(45deg,#ff6f61,#ff9f80); color:white; border:none; padding:12px 18px; border-radius:50px; font-size:1.5em; cursor:pointer; opacity:0; pointer-events:none; transition:opacity 0.4s, transform 0.3s; z-index:1003; }
+#backToTop:hover { transform:scale(1.1); }
+#backToTop.show { opacity:1; pointer-events:auto; }
+
+/* Contact */
+.contact-card { display:flex; flex-wrap:wrap; gap:30px; align-items:center; justify-content:space-between; }
+.contact-info { flex:1; min-width:250px; }
+.contact-info h3 { font-size:1.8em; margin-bottom:10px; }
+.contact-info p { margin-bottom:8px; font-size:1em; }
+.contact-info a { color:var(--primary); text-decoration:none; }
+.pdf-buttons a { display:inline-block; margin:5px 10px 5px 0; padding:10px 20px; border-radius:50px; background:var(--accent); color:white; font-weight:600; transition:0.3s; }
+.pdf-buttons a:hover { transform:scale(1.05); background:linear-gradient(45deg,#ff6f61,#ff9f80); box-shadow:0 10px 20px rgba(0,0,0,0.2); }
+
+/* Modal Images */
+.tab-content img, .modal-trigger { width:100%; max-width:400px; border-radius:15px; border:3px solid var(--accent); margin-top:15px; cursor:pointer; transition:0.3s; }
+.tab-content img:hover, .modal-trigger:hover { transform:scale(1.05); }
+.tab-content iframe { border-radius:15px; border:3px solid var(--accent); transition:0.3s; }
+.tab-content iframe:hover { transform:scale(1.02); box-shadow:0 10px 25px rgba(0,0,0,0.3); }
+.modal { display:none; position:fixed; z-index:2000; padding-top:60px; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.8); }
+.modal-content { margin:auto; display:block; max-width:90%; max-height:80%; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.5); animation:zoom 0.3s ease; }
+@keyframes zoom { from{transform:scale(0.7);} to{transform:scale(1);} }
+.close { position:absolute; top:30px; right:50px; color:white; font-size:40px; font-weight:bold; cursor:pointer; transition:0.3s; }
+.close:hover { color:#ff6f61; }
+
+/* Experience Cards always visible */
+.experience-card { background: var(--light-bg); border-radius: 20px; padding: 25px 30px; margin-bottom: 25px; position: relative; border-left: 6px solid var(--accent); opacity:1; transform:translateY(0); transition:none; }
+body.dark .experience-card { background:#222; color:var(--text-light); }
+.experience-card h3 { margin-bottom:8px; font-size:1.3em; color: var(--primary); }
+body.dark .experience-card h3 { color: var(--accent); }
+.experience-card p { font-weight:500; margin-bottom:8px; }
+.experience-card ul { margin-left:20px; margin-top:8px; }
+
+/* Responsive */
+@media(max-width:768px){ 
+  .contact-card { flex-direction:column; align-items:center; text-align:center; } 
+  .header-inner { flex-direction:column; }
+  .header-pic { margin-bottom:10px; }
+}
+/* ===== About Me Professional Indentation ===== */
+#about .card p {
+  padding-left: 48px;
+  position: relative;
+  margin-bottom: 18px;
+}
+
+/* Accent indicator for each paragraph */
+#about .card p::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 0.85em;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+/* ===== Scroll Down Indicator ===== */
+/* ===== Scroll Down Indicator (Right Side) ===== */
+.scroll-indicator {
+  position: fixed;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 45px;
+  border: 2px solid rgba(255,255,255,0.85);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 6px;
+  animation: bounce 2s infinite;
+  z-index: 1000;
+}
+
+.scroll-indicator span {
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: scrollDot 2s infinite;
+}
+
+/* Dot animation */
+@keyframes scrollDot {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(12px); opacity: 0.6; }
+  100% { transform: translateY(18px); opacity: 0; }
+}
+
+/* Subtle bounce */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(-50%);
+  }
+  40% {
+    transform: translateY(-55%);
+  }
+  60% {
+    transform: translateY(-52%);
+  }
+}
+
+/* Hide indicator when header shrinks */
+header.shrink .scroll-indicator {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+/* ===== License Tab Layout (PRC Logo on Left) ===== */
+.license-container {
+  display: flex;            /* side-by-side layout */
+  align-items: center;      /* vertically align logo & text */
+  gap: 20px;                /* spacing between logo and text */
+  flex-wrap: wrap;           /* makes layout responsive on small screens */
+}
+
+.license-container .prc-logo {
+  max-width: 120px;         /* limits logo size */
+  height: auto;             /* keeps aspect ratio */
+  border-radius: 8px;       /* rounded corners */
+  border: 2px solid var(--accent);  /* border color matches your theme */
+}
+
+.license-container .license-text {
+  flex: 1;                  /* takes remaining horizontal space */
+}
+
+</style>
+</head>
+<body>
+
+<!-- Mini Header -->
+
+<!-- Toggle Dark/Light -->
+<button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark/Light</button>
+
+<!-- Header -->
+<header id="main-header">
+  <div class="header-inner">
+    <img src="profile.jpg" alt="Profile Picture" class="header-pic">
+   <div class="header-text-wrapper">
+  <div class="header-text">
+    <h1 class="header-name">Michael E. Piang</h1>
+    <p>Licensed Civil Engineer | Structural Design | Building Permit Plans</p>
+    <p>CAD • BIM • Cost Estimation • 3D Visualization</p>
+    <a href="cv.pdf" class="cta">Download CV</a>
+  </div>
+
+  <div class="scroll-indicator">
+    <span></span>
+  </div>
+</div>
+
+</header>
+
+<!-- About -->
+<section id="about">
+<h2>About Me</h2>
+<div class="card">
+<p>I am a <strong>Registered Civil Engineer</strong> with experience in structural planning, drafting, and project implementation across both public and private sectors. I specialize in preparing complete sets of building plans, conducting structural analysis, and developing cost estimates required for building permits and successful project execution.</p>
+
+<p>I have hands-on experience with local government infrastructure projects, including slope protection, drainage systems, road concreting, and vertical structures, as well as private residential developments. Currently, I also work as an Electrical Draftsman, where I prepare detailed electrical layout drawings and wiring support plans in compliance with design standards and project requirements.</p>
+
+<p>I am proficient in AutoCAD, SketchUp, Enscape, and STAAD, with working knowledge of Revit, PlanSwift, Primavera P6, Bluebeam Revu, ETABS, and other engineering software. Detail-oriented and well-organized, I am committed to delivering accurate, efficient, and code-compliant engineering solutions. I am eager to collaborate on projects involving structural design, drafting, and construction support.</p>
+</div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+<h2>Experience</h2>
+
+<div class="experience-card">
+<h3>Freelance Civil Engineer (2024 - Present)</h3>
+<p>Prepared complete sets of building plans, conducted structural analysis, and developed cost estimates required for building permits and successful project execution.</p>
+</div>
+
+<div class="experience-card">
+<h3>Wilmar Edible Oil Philippines Incorporated (Oct 2025 - Present)</h3>
+<p>Electrical Draftsman</p>
+<ul>
+<li>Prepared detailed electrical layout drawings, including lighting, power, and CCTV systems in accordance with design specifications and project standards.</li>
+<li>Developed cable tray and bus duct wiring support plans ensuring proper routing, coordination, and installation feasibility.</li>
+</ul>
+</div>
+
+<div class="experience-card">
+<h3>Local Government Unit (Apr 2025 – Oct 2025)</h3>
+<p>Job Order Engineer</p>
+<ul>
+<li>Resolved Barangay-to-Municipal infrastructure problems: slope protection, drainage canal, road concreting, vertical infrastructures.</li>
+<li>Prepared complete sets of plans and programs of work (BOQ/BOM) for every project.</li>
+<li>Conducted project inspections and monitoring for all projects.</li>
+</ul>
+</div>
+
+<div class="experience-card">
+<h3>RED Engineering Services (October 2023 - Jan 2024)</h3>
+<p>On-the-Job Training</p>
+<ul>
+<li>Project inspection of residential projects.</li>
+<li>Drafted whole sets of residential plans.</li>
+<li>Prepared detailed BOM/BOQ.</li>
+</ul>
+</div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+<h2>Skills & Technical Proficiency</h2>
+<div class="card">
+<div class="skill-container">
+  <div class="skill-title"><span>AutoCAD</span><span>95%</span></div>
+  <div class="skill-bar"><div class="skill-bar-inner" data-percent="95%"></div></div>
+</div>
+<div class="skill-container">
+  <div class="skill-title"><span>SketchUp</span><span>95%</span></div>
+  <div class="skill-bar"><div class="skill-bar-inner" data-percent="95%"></div></div>
+</div>
+<div class="skill-container">
+  <div class="skill-title"><span>Enscape</span><span>99%</span></div>
+  <div class="skill-bar"><div class="skill-bar-inner" data-percent="99%"></div></div>
+</div>
+<div class="skill-container">
+  <div class="skill-title"><span>STAAD</span><span>80%</span></div>
+  <div class="skill-bar"><div class="skill-bar-inner" data-percent="80%"></div></div>
+</div>
+<div class="skill-container">
+  <div class="skill-title"><span>Revit</span><span>50%</span></div>
+  <div class="skill-bar"><div class="skill-bar-inner" data-percent="50%"></div></div>
+</div>
+<div class="skill-container">
+  <div class="skill-title"><span>PlanSwift</span><span>60%</span></div>
+  <div class="skill-bar"><div class="skill-bar-inner" data-percent="60%"></div></div>
+</div>
+<div class="skill-container">
+  <div class="skill-title"><span>Primavera P6</span><span>45%</span></div>
+  <div class="skill-bar"><div class="skill-bar-inner" data-percent="45%"></div></div>
+</div>
+<div class="skill-container">
+  <div class="skill-title"><span>Bluebeam / ETABS / Civil3D</span><span>30%</span></div>
+  <div class="skill-bar"><div class="skill-bar-inner" data-percent="30%"></div></div>
+</div>
+</div>
+</section>
+
+<!-- Credentials & Certificates -->
+<section id="credentials">
+<h2>Credentials & Certificates</h2>
+<div class="card">
+<div class="tab-buttons">
+  <button class="tab-btn active" onclick="openTab(event,'education')">Education</button>
+  <button class="tab-btn" onclick="openTab(event,'license')">License</button>
+  <button class="tab-btn" onclick="openTab(event,'certificate')">Certificates</button>
+</div>
+
+<div id="education" class="tab-content active">
+  <div class="license-container"> <!-- reuse the same class for layout -->
+    <img src="edu-logo.png" alt="Education Logo" class="prc-logo">
+    <div class="license-text">
+      <p><strong>Bachelor of Science in Civil Engineering</strong></p>
+      <p>Jose Rizal Memorial State University, Dapitan City, June 2024</p>
+    </div>
+  </div>
+</div>
+
+<div id="license" class="tab-content">
+  <div class="license-container">
+    <img src="prc-logo.png" alt="PRC Logo" class="prc-logo">
+    <div class="license-text">
+      <p><strong>Registered Civil Engineer</strong></p>
+      <p>Passed Civil Engineering Licensure Exam – Philippine Regulatory Commission, November 2024</p>
+    </div>
+  </div>
+</div>
+
+<div id="certificate" class="tab-content">
+<p>View-Only Certificates:</p>
+<img src="certificates/certificate1.jpg" class="modal-trigger">
+<img src="certificates/certificate2.jpg" class="modal-trigger">
+<img src="certificates/certificate3.jpg" class="modal-trigger">
+<img src="certificates/certificate4.jpg" class="modal-trigger">
+<img src="certificates/certificate5.jpg" class="modal-trigger">
+<!-- Add more certificates here as needed -->
+</div>
+</div>
+</section>
+
+<!-- Sample Works -->
+<section id="samples">
+<h2>Sample Works</h2>
+<div class="card">
+<div class="tab-buttons">
+  <button class="tab-btn active" onclick="openTab(event,'rendered')">Rendered Perspective Plans</button>
+  <button class="tab-btn" onclick="openTab(event,'structural')">Structural Analysis Reports</button>
+  <button class="tab-btn" onclick="openTab(event,'fullplans')">Whole Set of Plans PDF</button>
+</div>
+
+<div id="rendered" class="tab-content active">
+<img src="samples/render1.jpg" class="modal-trigger">
+<img src="samples/render2.jpg" class="modal-trigger">
+<img src="samples/render3.jpg" class="modal-trigger">
+<img src="samples/render4.jpg" class="modal-trigger">
+
+<!-- Add more rendered images -->
+</div>
+
+<div id="structural" class="tab-content">
+<img src="samples/structural1.jpg" class="modal-trigger">
+<img src="samples/structural2.jpg" class="modal-trigger">
+<!-- Add more structural images -->
+</div>
+
+<div id="fullplans" class="tab-content">
+<iframe src="fullplan.pdf#toolbar=0&navpanes=0&scrollbar=1" width="100%" height="500px" style="border:2px solid var(--accent); border-radius:10px;"></iframe>
+<iframe src="fullplan1.pdf#toolbar=0&navpanes=0&scrollbar=1" width="100%" height="500px" style="border:2px solid var(--accent); border-radius:10px;"></iframe>
+
+</div>
+</div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+<h2>Contact</h2>
+<div class="card contact-card">
+<div class="contact-info">
+<h3>Michael E. Piang</h3>
+<p>Email: <a href="mailto:mikelpiang.27@gmail.com">mikelpiang.27@gmail.com</a></p>
+<p>Phone: <a href="tel:+639386603335">+63 938 660 3335</a></p>
+<p>LinkedIn: <a href="https://www.linkedin.com/in/michael-etam-piang" target="_blank">https://www.linkedin.com/in/michael-etam-piang-2b04b6329/</a></p>
+</div>
+<div class="pdf-buttons">
+<a href="cv.pdf" target="_blank">Download CV</a>
+</div>
+</div>
+</section>
+
+<!-- Back to top -->
+<button id="backToTop">&#8679;</button>
+
+<!-- Modal -->
+<div id="imageModal" class="modal">
+<span class="close">&times;</span>
+<img class="modal-content" id="modalImage">
+</div>
+
+<script>
+// Dark/Light
+function toggleDarkMode(){ document.body.classList.toggle("dark"); }
+
+// Header shrink
+const header=document.getElementById('main-header');
+const backTop=document.getElementById('backToTop');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>120){ header.classList.add('shrink'); miniHeader.classList.add('visible'); backTop.classList.add('show'); }
+  else{ header.classList.remove('shrink'); miniHeader.classList.remove('visible'); backTop.classList.remove('show'); }
+});
+
+// Back to top
+backTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
+
+// Tabs
+function openTab(evt,tabName){
+  const tabs=evt.currentTarget.parentNode.parentNode.querySelectorAll(".tab-content");
+  tabs.forEach(t=>t.classList.remove("active"));
+  const btns=evt.currentTarget.parentNode.querySelectorAll(".tab-btn");
+  btns.forEach(b=>b.classList.remove("active"));
+  document.getElementById(tabName).classList.add("active");
+  evt.currentTarget.classList.add("active");
+}
+
+// Skills animation
+const skills=document.querySelectorAll(".skill-bar-inner");
+window.addEventListener("scroll",()=>{
+  const triggerBottom=window.innerHeight*0.85;
+  skills.forEach(skill=>{
+    const skillTop=skill.getBoundingClientRect().top;
+    if(skillTop<triggerBottom){ skill.style.width=skill.getAttribute("data-percent"); }
+  });
+});
+
+// Sections animation
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+  const triggerBottom=window.innerHeight*0.85;
+  sections.forEach(sec=>{
+    const secTop=sec.getBoundingClientRect().top;
+    if(secTop<triggerBottom){ sec.classList.add("visible"); }
+  });
+});
+
+// Modal
+const modal=document.getElementById("imageModal");
+const modalImg=document.getElementById("modalImage");
+const triggers=document.querySelectorAll(".modal-trigger");
+triggers.forEach(img=>{ img.addEventListener("click",()=>{ modal.style.display="block"; modalImg.src=img.src; }); });
+document.querySelector(".close").addEventListener("click",()=>{ modal.style.display="none"; });
+window.addEventListener("click",e=>{ if(e.target==modal) modal.style.display="none"; });
+// Adjust anchor scrolls for sticky header
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    const headerHeight = document.querySelector('header').offsetHeight;
+    window.scrollTo({
+      top: target.offsetTop - headerHeight - 10, // 10px extra spacing
+      behavior: 'smooth'
+    });
+  });
+});
+
+</script>
+
+</body>
+</html>
